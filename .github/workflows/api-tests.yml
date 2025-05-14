@@ -1,0 +1,87 @@
+name: Integration Tests with Allure Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_message:
+        description: 'Deployment message'
+        required: true
+        default: 'Manual production deployment'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment:
+      name : ${{ github.ref == 'refs/heads/main' && 'Production' || 'Test' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Create and populate .env file
+        run: |
+          echo "Creating .env file..."
+          touch .env
+          echo "RECRUITER_EMAIL=${{ vars.RECRUITER_EMAIL }}" >> .env
+          echo "RECRUITER_PASSWORD=${{ vars.RECRUITER_PASSWORD }}" >> .env
+          echo "BASE_URI=${{ vars.BASE_URI }}" >> .env
+          echo "APP_URL=${{ vars.APP_URL }}" >> .env
+          echo "INTERVIEW_ID=${{ vars.INTERVIEW_ID }}" >> .env
+          echo "ASSESSMENT_ID=${{ vars.ASSESSMENT_ID }}" >> .env
+          
+          echo "Verifying .env file content:"
+          cat .env
+
+      - name: Install Allure Commandline
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://github.com/allure-framework/allure2/releases/download/2.17.2/allure-2.17.2.tgz
+          tar -xvzf allure-2.17.2.tgz
+          sudo mv allure-2.17.2 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
+          allure --version  # Verify that allure is installed
+
+      - name: Run Maven tests
+        run: mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/velents/tests/apiE2eTests/*/**" test
+
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@v1.7
+        with:
+          allure_results: allure-results
+
+      - name: Upload Allure report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download Allure report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh_pages
+          publish_dir: ./allure-report
