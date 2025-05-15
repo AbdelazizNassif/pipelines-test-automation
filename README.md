@@ -6,6 +6,23 @@
 - Running tests in docker containers
 ```
 
+## How to run
+```bash
+# for both api test and web tests 
+- I use github actions for the running the tests and deploying allure report to github page
+  - Make sure to make the repo public
+  - For getting report for web tests run the e2e-tests.yml workflow then visit "https://abdelaziznassif.github.io/q-pros-task"
+  - For getting report for web tests run the api-tests.yml workflow then visit "https://abdelaziznassif.github.io/q-pros-task"
+  - For web parallel execution on different browsers is not done yet because I ran out of time, I will contiune on in the next few days
+# for mobile tests, you can now run it locally
+  - download appium server
+  - enable uiautomator2 driver
+  - install android studio
+  - install emulator on android studio then update the desired caps accordigly
+  - run the tests
+  - then from terminal run allure serve to get the report
+```
+
 ## Design patterns used:
 ```bash
 - Page object model design pattern
