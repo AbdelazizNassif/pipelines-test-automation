@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"2141513757a96e82d3ad9095e2b71c7e","name":"com.ecomm.tests.shopping.TestAddingBookToCart","statistic":{"failed":0,"broken":0,"skipped":0,"passed":4,"unknown":0,"total":4}}]}
+{"total":1,"items":[{"uid":"8f39d0e256d4ae9e46dfd981ab2ec3fb","name":"com.petStore.tests.user.TestUsersEndToEnd","statistic":{"failed":0,"broken":0,"skipped":0,"passed":6,"unknown":0,"total":6}}]}
