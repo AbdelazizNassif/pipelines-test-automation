@@ -17,7 +17,7 @@ public class UsersRequests {
 
     public UsersRequests() {
         dotenv = Dotenv.load();
-        baseUrl = dotenv.get("BASE_URI");
+        baseUrl = "http://localhost:8080/";
     }
 
     @Step("create new user")

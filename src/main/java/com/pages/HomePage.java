@@ -25,8 +25,7 @@ public class HomePage {
 
     @Step("navigate to home page")
     public void navigate () {
-        String appUrl = dotenv.get("APP_URL");
-        appUrl = "https://practice.automationtesting.in/";
+        String appUrl = "https://practice.automationtesting.in/";
         page.navigateToURL(driver, appUrl);
     }
 
