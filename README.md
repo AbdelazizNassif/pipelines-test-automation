@@ -15,11 +15,14 @@
   - For getting report for web tests run the api-tests.yml workflow then visit "https://abdelaziznassif.github.io/q-pros-task"
   - For web parallel execution on different browsers is not done yet because I ran out of time, I will contiune on in the next few days
 # for mobile tests, you can now run it locally
-  - download appium server
-  - enable uiautomator2 driver
+  - install Java 11 and maven on your local machine
+  - install node.js on your local machine
+  - download appium server > npm install -g appium
+  - enable uiautomator2 driver > appium driver install uiautomator2
   - install android studio
   - install emulator on android studio then update the desired caps accordigly
-  - run the tests
+  - run the tests > mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/mobile/tests/**" test
+
   - then from terminal run allure serve to get the report
 ```
 
