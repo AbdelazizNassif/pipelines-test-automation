@@ -1,4 +1,4 @@
-name: Selenium Tests with Allure Report
+name: Backend Tests with Allure Report
 
 on:
   workflow_dispatch:
