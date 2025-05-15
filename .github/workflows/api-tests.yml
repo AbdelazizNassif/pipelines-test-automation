@@ -1,4 +1,4 @@
-name: Integration Tests with Allure Report
+name: Selenium Tests with Allure Report
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment:
-      name : ${{ github.ref == 'refs/heads/main' && 'Production' || 'Test' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Test' }}
 
     steps:
       - name: Checkout repository
@@ -23,6 +23,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install App
+        run: |
+          docker pull swaggerapi/petstore3:unstable
+          docker run  --name swaggerapi-petstore3 -d -p 8080:8080 swaggerapi/petstore3:unstable
 
       - name: Install Allure Commandline
         run: |
