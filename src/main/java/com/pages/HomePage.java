@@ -1,7 +1,6 @@
 package com.pages;
 
 import filesReaders.PropertyFileReader;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,7 +11,6 @@ public class HomePage {
 
     WebDriver driver = null ;
     BasePage page = null;
-    protected Dotenv dotenv = Dotenv.load();
     private WebDriverWait wait;
     final PropertyFileReader executionProps = new PropertyFileReader("execution.properties");
 

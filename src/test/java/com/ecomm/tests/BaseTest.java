@@ -1,7 +1,6 @@
 package com.ecomm.tests;
 
 import driverSettigns.DriverFactory;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +10,6 @@ import utils.ScreenshotUtil;
 public class BaseTest {
 
     public WebDriver driver = null;
-    public Dotenv dotenv = null;
 
     @BeforeAll
     @Description("Initialize chrome browser")
@@ -19,7 +17,6 @@ public class BaseTest {
     public void initializeDriver() {
         driver = new DriverFactory().getDriver();
         driver.manage().window().maximize();
-        dotenv = Dotenv.load();
     }
 
     @AfterAll

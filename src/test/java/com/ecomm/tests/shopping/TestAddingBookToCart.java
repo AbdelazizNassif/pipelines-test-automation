@@ -3,7 +3,6 @@ package com.ecomm.tests.shopping;
 import com.ecomm.tests.BaseTest;
 import com.pages.*;
 import filesReaders.JsonFileReader;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 
@@ -13,7 +12,6 @@ import java.util.HashMap;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestAddingBookToCart extends BaseTest {
 
-    public Dotenv dotenv = null;
     Float htmlBookPrice;
     Integer quantity;
     String bookName;
@@ -23,7 +21,6 @@ public class TestAddingBookToCart extends BaseTest {
     @Description("preconditions - navigate to home page")
     @DisplayName("preconditions - navigate to home page")
     public void preconditions_navigateToHomePage() {
-        dotenv = Dotenv.load();
         new HomePage(driver).navigate();
         // read test data
         JsonFileReader testData = new JsonFileReader("dataByKey/bookOrderDetails.json");

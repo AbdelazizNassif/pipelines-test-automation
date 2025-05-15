@@ -2,7 +2,6 @@ package com.mobilePages;
 
 import filesReaders.PropertyFileReader;
 import io.appium.java_client.android.AndroidDriver;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,7 +12,6 @@ public class AndroidPopupsActions {
 
     AndroidDriver driver = null ;
     MobileBasePage mobilePage = null;
-    protected Dotenv dotenv = Dotenv.load();
     private WebDriverWait wait;
     final PropertyFileReader executionProps = new PropertyFileReader("execution.properties");
 

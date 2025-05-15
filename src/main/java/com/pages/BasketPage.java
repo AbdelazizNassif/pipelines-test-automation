@@ -1,7 +1,6 @@
 package com.pages;
 
 import filesReaders.PropertyFileReader;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +14,6 @@ public class BasketPage {
 
     WebDriver driver = null ;
     BasePage page = null;
-    protected Dotenv dotenv = Dotenv.load();
     private WebDriverWait wait;
     final PropertyFileReader executionProps = new PropertyFileReader("execution.properties");
 
@@ -27,8 +25,7 @@ public class BasketPage {
     }
     @Step("navigate to shop page")
     public void navigate () {
-        String url = dotenv.get("APP_URL");
-        url = "https://practice.automationtesting.in/basket/";
+        String url = "https://practice.automationtesting.in/basket/";
         page.navigateToURL(driver, url);
     }
     @Step("get product in the basket")

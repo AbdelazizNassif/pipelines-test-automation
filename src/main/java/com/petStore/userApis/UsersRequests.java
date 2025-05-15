@@ -1,7 +1,6 @@
 package com.petStore.userApis;
 
 import com.petStore.pojoBodies.user.User;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -13,10 +12,8 @@ public class UsersRequests {
 
     String baseUrl;
     String userEndpoint = "/api/v3/user/";
-    public Dotenv dotenv = null;
 
     public UsersRequests() {
-        dotenv = Dotenv.load();
         baseUrl = "http://localhost:8080/";
     }
 

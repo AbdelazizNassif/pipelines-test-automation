@@ -2,7 +2,6 @@ package com.petStore.tests.user;
 
 import com.petStore.pojoBodies.user.User;
 import com.petStore.userApis.UsersRequests;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
@@ -14,7 +13,6 @@ import utils.DataGeneration;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestUsersEndToEnd {
 
-    public Dotenv dotenv = null;
     User user = null;
     Integer id;
     String username;
@@ -29,7 +27,6 @@ public class TestUsersEndToEnd {
     @Description("create new user")
     @DisplayName("create new user")
     public void preconditions_createUser() {
-        dotenv = Dotenv.load();
         user = new User();
         id = 1;
         username = new DataGeneration().generateRandomString(5);
