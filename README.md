@@ -1,9 +1,7 @@
-# Velents BE & E2E tests..
-
 ## Used tools and libraries:
 ```bash
-- Java-17, maven, Junit5.
-- major used libs > Selenium, Rest assured, allure reporting.
+- Java-11, maven, Junit5.
+- major used libs > Selenium, Rest assured, Appium and allure reporting.
 - Json reader, Property file reader.
 - Running tests in docker containers
 ```
@@ -25,11 +23,6 @@
 ### Open allure report locally from cmd
 ```bash
 Allure serve
-```
-### To open report after the pipeline: 
-```bash
-- BE test results  > todo
-- E2E test results > todo
 ```
 
 ## How to contribute:

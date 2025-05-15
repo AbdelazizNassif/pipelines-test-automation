@@ -24,20 +24,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create and populate .env file
-        run: |
-          echo "Creating .env file..."
-          touch .env
-          echo "RECRUITER_EMAIL=${{ vars.RECRUITER_EMAIL }}" >> .env
-          echo "RECRUITER_PASSWORD=${{ vars.RECRUITER_PASSWORD }}" >> .env
-          echo "BASE_URI=${{ vars.BASE_URI }}" >> .env
-          echo "APP_URL=${{ vars.APP_URL }}" >> .env
-          echo "INTERVIEW_ID=${{ vars.INTERVIEW_ID }}" >> .env
-          echo "ASSESSMENT_ID=${{ vars.ASSESSMENT_ID }}" >> .env
-          
-          echo "Verifying .env file content:"
-          cat .env
-
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
 

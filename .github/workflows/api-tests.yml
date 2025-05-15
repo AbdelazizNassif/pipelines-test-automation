@@ -24,20 +24,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create and populate .env file
-        run: |
-          echo "Creating .env file..."
-          touch .env
-          echo "RECRUITER_EMAIL=${{ vars.RECRUITER_EMAIL }}" >> .env
-          echo "RECRUITER_PASSWORD=${{ vars.RECRUITER_PASSWORD }}" >> .env
-          echo "BASE_URI=${{ vars.BASE_URI }}" >> .env
-          echo "APP_URL=${{ vars.APP_URL }}" >> .env
-          echo "INTERVIEW_ID=${{ vars.INTERVIEW_ID }}" >> .env
-          echo "ASSESSMENT_ID=${{ vars.ASSESSMENT_ID }}" >> .env
-          
-          echo "Verifying .env file content:"
-          cat .env
-
       - name: Install Allure Commandline
         run: |
           sudo apt-get update
@@ -49,7 +35,7 @@ jobs:
           allure --version  # Verify that allure is installed
 
       - name: Run Maven tests
-        run: mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/velents/tests/apiE2eTests/*/**" test
+        run: mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/petStore/tests/*/**" test
 
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@v1.7

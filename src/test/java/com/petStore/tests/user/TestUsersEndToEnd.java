@@ -1,4 +1,4 @@
-package com.petStore.tests.apiE2eTests.user;
+package com.petStore.tests.user;
 
 import com.petStore.pojoBodies.user.User;
 import com.petStore.userApis.UsersRequests;
