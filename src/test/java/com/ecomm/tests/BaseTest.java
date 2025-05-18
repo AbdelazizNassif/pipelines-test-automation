@@ -14,14 +14,6 @@ public class BaseTest {
 
     public WebDriver driver = null;
 
-    //    @BeforeClass
-//    @Description("Initialize chrome browser")
-//    @DisplayName("Initialize chrome browser")
-//    public void initializeDriver() {
-//        driver = new DriverFactory().getDriver();
-//        driver.manage().window().maximize();
-//    }
-
     @Parameters("browser")
     @BeforeClass
     @Description("Initialize chrome browser")
