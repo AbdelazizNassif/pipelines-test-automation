@@ -6,19 +6,19 @@ import com.mobilePages.UnitsSettingsPage;
 import io.qameta.allure.Description;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.*;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import utils.WaitUtility;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@TestMethodOrder(MethodOrderer.MethodName.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
 public class TestContentOfSplashScreen extends BaseTest{
 
-    @BeforeAll
-    @Description("preconditions - change temp unit anf time unit")
-    @DisplayName("preconditions - change temp unit anf time unit")
+    @BeforeClass
+    @Description("Precondition: set temp unit to fehrenheit and hour unit to 24 hr ")
     public void precondition_changeTempUnitAndHourUnit () {
         AndroidPopupsActions popupsActions = new AndroidPopupsActions(driver);
         UnitsSettingsPage unitsSettingsPage = new UnitsSettingsPage(driver);
@@ -30,20 +30,18 @@ public class TestContentOfSplashScreen extends BaseTest{
     }
 
     @Test
-    @Description("validate temp is displayed in F degrees")
-    @DisplayName("validate temp is displayed in F degrees")
+    @Description("validate temp is displayed in fehrenheit")
     public void a_validateTemperatureIsDisplayedInFehrinheit() {
         AndroidPopupsActions popupsActions = new AndroidPopupsActions(driver);
         popupsActions.clickALLOWPopup();
         popupsActions.clickAllowPopup();
         popupsActions.closePopup();
         SplashPage splashPage = new SplashPage(driver);
-        Assertions.assertTrue(splashPage.getTemperatureUnit().toLowerCase().contains("f"),
+        Assert.assertTrue(splashPage.getTemperatureUnit().toLowerCase().contains("f"),
                 "temperature unit is not as expected");
     }
     @Test
     @Description("validate time is displayed in 24 h format")
-    @DisplayName("validate time is displayed in 24 h format")
     public void b_validateTimeIsDisplayedInTwentyFourHrFormat() {
         SplashPage splashPage = new SplashPage(driver);
         Set<Integer> times = new HashSet<>();
@@ -52,7 +50,7 @@ public class TestContentOfSplashScreen extends BaseTest{
             times.addAll(splashPage.longRightSwipeOnTimesThenAddDisplayedTimes());
             new WaitUtility().waitForInterval(1000);
         }
-        MatcherAssert.assertThat("hours should contain numbers above 12",
+        MatcherAssert.assertThat("day hours should be more than 12",
                 times, Matchers.hasSize(Matchers.greaterThan(12)));
         ;
         MatcherAssert.assertThat("hours should contain numbers above 12",
@@ -60,13 +58,12 @@ public class TestContentOfSplashScreen extends BaseTest{
     }
     @Test
     @Description("validate next five days rain predictions are displayed")
-    @DisplayName("validate next five days rain predictions are displayed")
     public void c_validateNextFiveDaysRainPredictionsAreDisplayed() {
         SplashPage splashPage = new SplashPage(driver);
         splashPage.swipeToRainAndHumidityIcons();
-        Assertions.assertEquals(5, splashPage.isNextFiveRainDaysDisplayed(),
+        Assert.assertEquals(5, splashPage.isNextFiveRainDaysDisplayed(),
                 "next five days are displayed");
-        Assertions.assertEquals(5, splashPage.isWaterDropIconDisplayedForNextFiveDays(),
+        Assert.assertEquals(5, splashPage.isWaterDropIconDisplayedForNextFiveDays(),
                 "water icons is displayed for next five days are displayed");
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
@@ -15,33 +16,36 @@ import java.net.URL;
 public class DriverFactory {
     WebDriver driver = null;
     String runMode = null;
-    String browser = null;
+//    String browser = null;
 
-    public WebDriver getDriver() {
+    public WebDriver getDriver(String browserName) {
         final String PROPERTIES_FILE_NAME = "execution.properties";
         final PropertyFileReader executionProps = new PropertyFileReader(PROPERTIES_FILE_NAME);
         runMode = executionProps.getPropertyByKey("RUN_MODE");
         if (runMode.equalsIgnoreCase("local")) {
-            browser = executionProps.getPropertyByKey("BROWSER");
-            if (browser.equalsIgnoreCase("chrome")) {
+            if (browserName.equalsIgnoreCase("chrome")) {
                 ChromeOptions options = new ChromeOptions();
                 if (executionProps.getBooleanProperty("HEADLESS")) {
                     options.addArguments("--headless=new");
                     options.addArguments("--window-size=1528,740");
                 }
                 driver = new ChromeDriver(options);
-            } else if (browser.equalsIgnoreCase("edge")) {
+            } else if (browserName.equalsIgnoreCase("edge")) {
                 driver = new EdgeDriver();
-            } else if (browser.equalsIgnoreCase("firefox")) {
+            } else if (browserName.equalsIgnoreCase("firefox")) {
                 driver = new FirefoxDriver();
+                FirefoxOptions options = new FirefoxOptions();
+                if (executionProps.getBooleanProperty("HEADLESS")) {
+                    options.addArguments("--headless=new");
+                    options.addArguments("--window-size=1528,740");
+                }
             } else {
                 System.out.println("Not supported browser");
             }
         } else if (runMode.equalsIgnoreCase("docker")) {
             DesiredCapabilities caps = new DesiredCapabilities();
-            caps.setBrowserName(executionProps.getPropertyByKey("BROWSER"));
+            caps.setBrowserName(browserName);
             caps.setPlatform(Platform.LINUX);
-
             try {
                 driver = new RemoteWebDriver(new URL(executionProps.getPropertyByKey("DOCKER_ADDRESS")), caps);
             } catch (MalformedURLException e) {
@@ -50,7 +54,7 @@ public class DriverFactory {
         } else if (runMode.equalsIgnoreCase("localGrid")) {
             DesiredCapabilities caps = new DesiredCapabilities();
 
-            caps.setBrowserName(executionProps.getPropertyByKey("BROWSER"));
+            caps.setBrowserName(browserName);
             caps.setPlatform(Platform.LINUX);
             try {
                 driver = new RemoteWebDriver(new URL("http://localhost:4444/"), caps);

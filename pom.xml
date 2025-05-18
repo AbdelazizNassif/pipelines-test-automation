@@ -9,28 +9,23 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <selenium.version>4.27.0</selenium.version>
-        <rest-assured.version>5.5.0</rest-assured.version>
+        <rest-assured.version>5.5.1</rest-assured.version>
         <jackson-databind.version>2.18.2</jackson-databind.version>
         <json-simple.version>1.1.1</json-simple.version>
         <commons-io.version>2.18.0</commons-io.version>
         <dotenv.version>3.0.0</dotenv.version>
         <lombok.version>1.18.34</lombok.version>
-
-        <junit.jupiter.version>5.11.3</junit.jupiter.version>
-        <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <allure-junit5.version>2.29.1</allure-junit5.version>
-
+        <allure.version>2.24.0</allure.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
         <firebase.admin.version>9.4.1</firebase.admin.version>
         <google.services.version>3.1.1</google.services.version>
         <google.gosn.version>2.10.1</google.gosn.version>
-        <allure-maven.version>2.13.0</allure-maven.version>
-
-        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <allure-maven.version>2.15.2</allure-maven.version>
+        <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <aspectj.version>1.9.19</aspectj.version>
-        <junit-platform-surefire-provider.version>1.3.1</junit-platform-surefire-provider.version>
     </properties>
     <build>
         <plugins>
@@ -39,6 +34,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <!-- optional if using testng.xml -->
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <reportFormat>plain</reportFormat>
                     <argLine>
@@ -97,37 +96,24 @@
             <dependency>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-bom</artifactId>
-                <version>${allure-junit5.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit.jupiter.version}</version>
+                <version>${allure.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
     <dependencies>
-
-        <!--JUNIT 5 Dependencies-->
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
         </dependency>
         <!--Allure Reporting Dependencies-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit-pioneer</groupId>
-            <artifactId>junit-pioneer</artifactId>
-            <version>${junit-pioneer.version}</version>
-            <scope>test</scope>
+            <artifactId>allure-testng</artifactId>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -168,6 +154,13 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
         <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>${firebase.admin.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.gms/google-services -->
+        <!-- https://mvnrepository.com/artifact/com.google.gms/google-services -->
+        <dependency>
             <groupId>com.google.gms</groupId>
             <artifactId>google-services</artifactId>
             <version>${google.services.version}</version>
@@ -188,25 +181,11 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.5</version>
         </dependency>
-        <!--  appium deps -->
-        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+        <!-- https://mvnrepository.com/artifact/com.aspose/aspose-words -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>8.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-remote-driver</artifactId>
-            <version>4.27.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.10.2</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 </project>

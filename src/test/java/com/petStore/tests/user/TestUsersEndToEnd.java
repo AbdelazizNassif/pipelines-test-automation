@@ -5,12 +5,11 @@ import com.petStore.userApis.UsersRequests;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import utils.DataGeneration;
 
 
-@TestMethodOrder(MethodOrderer.MethodName.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestUsersEndToEnd {
 
     User user = null;
@@ -23,9 +22,8 @@ public class TestUsersEndToEnd {
     String phone;
     Integer userStatus;
     String updatedUsername;
-    @BeforeAll
+    @BeforeClass
     @Description("create new user")
-    @DisplayName("create new user")
     public void preconditions_createUser() {
         user = new User();
         id = 1;
@@ -48,7 +46,6 @@ public class TestUsersEndToEnd {
 
     @Test
     @Description("1-create new user")
-    @DisplayName("1-create new user")
     public void a_testAddingNewUser () {
         Response response = new UsersRequests()
                 .createNewUser(user);
@@ -66,7 +63,6 @@ public class TestUsersEndToEnd {
 
     @Test
     @Description("2-get user by username")
-    @DisplayName("2-get user by username")
     public void b_testGettingUserByUsername () {
         Response response = new UsersRequests()
                 .getUserByUsername(username);
@@ -83,7 +79,6 @@ public class TestUsersEndToEnd {
 
     @Test
     @Description("3-update user")
-    @DisplayName("3-update user")
     public void c_testUpdatingUser () {
         updatedUsername = new DataGeneration().generateRandomString(5);
         user.setUsername(updatedUsername);
@@ -103,7 +98,6 @@ public class TestUsersEndToEnd {
 
     @Test
     @Description("4-get user after updating username")
-    @DisplayName("4-get user after updating username")
     public void d_testGettingUserAfterUpdatingUsername () {
         Response response = new UsersRequests()
                 .getUserByUsername(updatedUsername);
@@ -120,7 +114,6 @@ public class TestUsersEndToEnd {
 
     @Test
     @Description("5-delete user")
-    @DisplayName("5-delete user")
     public void e_testDeletingUser () {
         Response response = new UsersRequests()
                 .deleteUser(updatedUsername);
@@ -130,7 +123,6 @@ public class TestUsersEndToEnd {
 
     @Test
     @Description("6-get user after deletion")
-    @DisplayName("6-get user after deletion")
     public void f_testGettingUserAfterDeletion () {
         Response response = new UsersRequests()
                 .getUserByUsername(updatedUsername);

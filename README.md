@@ -37,8 +37,8 @@
 ## How to run the project:
 ### to run all tests: 
 ```bash
-- Run BE tests > mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=true" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/velents/tests/apiE2eTests/*/**" test -Dgroups="${RUN_ENV} & ${RUN_TYPE}"
-- Run E2E tests > mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -Dtest="com/velents/tests/regressionE2eTests/*/**" test -Dgroups="${{ parameters.runEnv }}"
+- Run BE tests > mvn clean test -Dtest="com.petStore.tests.*.**" test
+- Run E2E tests > mvn clean test
 ```
 ### Open allure report locally from cmd
 ```bash
