@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <java.version>17</java.version>
-        <selenium.version>4.27.0</selenium.version>
+        <java.version>11</java.version>
+        <selenium.version>4.19.1</selenium.version>
         <rest-assured.version>5.5.1</rest-assured.version>
         <jackson-databind.version>2.18.2</jackson-databind.version>
         <json-simple.version>1.1.1</json-simple.version>
@@ -186,6 +186,11 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>8.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>${selenium.version}</version>
         </dependency>
     </dependencies>
 </project>
