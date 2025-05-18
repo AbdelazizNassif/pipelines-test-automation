@@ -1,6 +1,6 @@
 ## Used tools and libraries:
 ```bash
-- Java-11, maven, tesng.
+- Java-11, maven, testng.
 - major used libs > Selenium, Rest assured, Appium and allure reporting.
 - Json reader, Property file reader.
 - Running tests in docker containers
@@ -17,7 +17,9 @@
     - sample: "https://drive.google.com/file/d/1GAZ_JNehOAfyH0S7WF_Lv85Y_ouQdX3j/view?usp=sharing"
   - For web parallel execution on different browsers is not done yet because I ran out of time, I will contiune on in the next few days
 ```
+
 ## for mobile tests, you can now run it locally
+```bash
   - install Java 11 and maven on your local machine
   - install node.js on your local machine
   - download appium server > npm install -g appium
