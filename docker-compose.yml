@@ -8,7 +8,7 @@ services:
       - "4445:4444"
 
   firefox:
-    image: selenium/node-firefox:4.19.1-20240508
+    image: selenium/node-firefox:latest
     depends_on:
       - selenium-hub
     environment:
