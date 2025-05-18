@@ -8,7 +8,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
 
 public class BaseTest {
     protected AndroidDriver driver;
@@ -18,16 +17,13 @@ public class BaseTest {
     @Description("init appium driver and caps")
     public void setupDriverAndCapabilities() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("browserstack.userName", "abdelaziznassif_ieLJbE");
-        caps.setCapability("browserstack.accessKey", "Jd1YdAybYvZbg94pEWsL");
-        caps.setCapability("app", "bs://c5cb5a1ce77b660d8e3d00bd079e281217ccc33d");
-        caps.setCapability("deviceName", "OnePlus 9");
+        caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "11.0");
-        driver = new AndroidDriver(
-                new URL("http://abdelaziznassif_ieljbe.browserstack.com"), caps);
+        caps.setCapability("platformVersion", "13");
+        caps.setCapability("deviceName", "Pixel XL");
+        caps.setCapability("app", System.getProperty("user.dir") + "\\app\\weather-forecast.apk");
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), caps);
     }
-
 
 
     @AfterClass
