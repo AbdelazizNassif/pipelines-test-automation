@@ -32,7 +32,7 @@ public class BaseTest {
     }
 
     @AfterClass
-    @Description("Initialize chrome browser")
+    @Description("Quit Browser")
     public void quitDriver() {
         driver.quit();
     }
