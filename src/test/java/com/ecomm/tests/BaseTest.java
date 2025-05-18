@@ -2,36 +2,54 @@ package com.ecomm.tests;
 
 import driverSettigns.DriverFactory;
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import utils.ScreenshotUtil;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
 
     public WebDriver driver = null;
 
-    @BeforeAll
+    //    @BeforeClass
+//    @Description("Initialize chrome browser")
+//    @DisplayName("Initialize chrome browser")
+//    public void initializeDriver() {
+//        driver = new DriverFactory().getDriver();
+//        driver.manage().window().maximize();
+//    }
+
+    @Parameters("browser")
+    @BeforeClass
     @Description("Initialize chrome browser")
-    @DisplayName("Initialize chrome browser")
-    public void initializeDriver() {
-        driver = new DriverFactory().getDriver();
+    public void setup(String browserName) {
+        switch (browserName.toUpperCase()) {
+            case "CHROME":
+                driver = new DriverFactory().getDriver("chrome");
+                break;
+            case "FIREFOX":
+                driver = new DriverFactory().getDriver("firefox");
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser: " + browserName);
+        }
         driver.manage().window().maximize();
     }
 
-    @AfterAll
+    @AfterClass
     @Description("Initialize chrome browser")
-    @DisplayName("Initialize chrome browser")
     public void quitDriver() {
         driver.quit();
     }
 
-    @AfterEach
+    @AfterMethod
     @Description("Take screenshot")
-    @DisplayName("Take screenshot")
-    public void takeScreenShot(TestInfo testInfo) {
+    public void takeScreenShot(ITestResult testInfo) {
         new ScreenshotUtil().
-                attachScreenshotToAllureReport(driver, testInfo.getDisplayName());
+                attachScreenshotToAllureReport(driver, testInfo.getName());
     }
 
 

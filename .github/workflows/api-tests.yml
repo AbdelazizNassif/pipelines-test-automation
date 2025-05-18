@@ -43,7 +43,7 @@ jobs:
           allure --version  # Verify that allure is installed
 
       - name: Run Maven tests
-        run: mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/petStore/tests/*/**" test
+        run: mvn clean test -Dtest="com.petStore.tests.*.**" test
 
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@v1.7
