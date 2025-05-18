@@ -27,7 +27,7 @@
   - enable uiautomator2 driver > appium driver install uiautomator2
   - install android studio
   - install emulator on android studio then update the desired caps accordigly
-  - run the tests > mvn clean -DargLine="-Xmx6g" -D"junit.jupiter.execution.parallel.enabled=false" -D"junit.jupiter.execution.parallel.config.strategy=dynamic" -Dtest="com/mobile/tests/**" test
+  - run the tests > mvn clean test -Dtest="com.mobile.tests.**" test
   - then from terminal run allure serve to get the report
 ```
 
