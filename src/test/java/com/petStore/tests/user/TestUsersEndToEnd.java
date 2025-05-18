@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.DataGeneration;
 
-
 public class TestUsersEndToEnd {
 
     User user = null;
