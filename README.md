@@ -35,7 +35,6 @@
 ```bash
 - Page object model design pattern
 - Data-driven design pattern
-  - Getting environment variables .env file locally and from pipelines/.env.prod file remotely
   - Getting test data from Json file
 ```
 
