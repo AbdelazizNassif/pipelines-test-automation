@@ -11,9 +11,9 @@
 ```bash
 - I use github actions for the running the tests and deploying allure report to github page
   - Make sure to make the repo public & set pages to "https://drive.google.com/file/d/1zjvdl9L-2bAdHeBAHWWb7Y88SAAjnrqI/view?usp=sharing"
-  - For getting report for web tests run the e2e-tests.yml workflow then visit "https://abdelaziznassif.github.io/q-pros-task"
+  - For getting report for web tests run the e2e-tests.yml workflow
      - sample: "https://drive.google.com/file/d/1xcV8k1LULY5jWDjQEZQd7sNuD4ZckUpg/view?usp=sharing"
-  - For getting report for web tests run the api-tests.yml workflow then visit "https://abdelaziznassif.github.io/q-pros-task"
+  - For getting report for web tests run the api-tests.yml workflow
     - sample: "https://drive.google.com/file/d/1GAZ_JNehOAfyH0S7WF_Lv85Y_ouQdX3j/view?usp=sharing"
 ```
 
